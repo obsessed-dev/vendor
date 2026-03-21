@@ -1,0 +1,15 @@
+[package]
+name = "vendor"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+phf = { version = "0.13.1", features = ["macros"] }
+
+[build-dependencies]
+serde_json = "1.0.149"
+
+[profile.release]
+strip = true # strips debug symbols
+opt-level = "z" # optimize for size over speed
+lto = true # link-time optimization
