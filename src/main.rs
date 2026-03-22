@@ -10,7 +10,7 @@ fn main() {
         process::exit(1);
     }
 
-    let mac_addr = &args[0];
+    let mac_addr = &args[0].to_uppercase();
     let mac_oui = mac_addr.split(':').take(3).collect::<Vec<_>>().join(":");
 
     match MAC_VENDORS.get(&mac_oui) {
