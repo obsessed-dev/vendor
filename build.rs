@@ -5,7 +5,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let entries: Vec<serde_json::Value> = serde_json::from_str(&json)?;
 
-    let out_dir = env::var("OUT_DIR").unwrap();
+    let out_dir = env::var("OUT_DIR")?;
     let dest = Path::new(&out_dir).join("vendors.rs");
 
     let mut map = String::from("static MAC_VENDORS: phf::Map<&str, &str> = phf::phf_map! {\n");
