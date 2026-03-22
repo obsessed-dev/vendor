@@ -1,7 +1,5 @@
 use std::{env, process};
 
-include!(concat!(env!("OUT_DIR"), "/vendors.rs"));
-
 fn main() {
     let args: Vec<_> = env::args().skip(1).collect();
 
@@ -10,10 +8,8 @@ fn main() {
         process::exit(1);
     }
 
-    let mac_addr = &args[0].to_uppercase();
-    let mac_oui = mac_addr.split(':').take(3).collect::<Vec<_>>().join(":");
-
-    match MAC_VENDORS.get(&mac_oui) {
+    let mac_addr = &args[0];
+    match mac_vendor_lookup::lookup_mac_vendor(&mac_addr) {
         Some(vendor) => println!("{}", vendor),
         None => println!("Unknown vendor"),
     }

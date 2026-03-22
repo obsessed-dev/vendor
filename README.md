@@ -1,8 +1,25 @@
-# vendor
+# mac-vendor-lookup
 
-A MAC address vendor lookup tool written in Rust. Translates an OUI (first 3 octets of a MAC address) into a human-readable manufacturer name using the IEEE public OUI database.
+A MAC address vendor lookup library and CLI tool written in Rust. Translates an OUI (first 3 octets of a MAC address) into a human-readable manufacturer name using the IEEE public OUI database.
 
-## Usage
+## Library Usage
+
+Add to your `Cargo.toml`:
+```toml
+[dependencies]
+mac-vendor-lookup = { path = "../vendor" }
+```
+
+Then call:
+```rust
+use mac_vendor_lookup::lookup_mac_vendor;
+
+if let Some(vendor) = lookup_mac_vendor("B8:27:EB:00:00:00") {
+    println!("{}", vendor); // Raspberry Pi Foundation
+}
+```
+
+## CLI Usage
 ```bash
 cargo run -- <MAC>
 ```
@@ -42,4 +59,4 @@ Unknown vendor
 
 - Full MAC addresses (`AA:BB:CC:DD:EE:FF`) and OUI-only (`AA:BB:CC`) both accepted
 - Lookup is case-insensitive on input
-- Part of the Isolayer Defense Scanner module — identifies IoT device manufacturers by MAC during network audits
+- Part of the Isolayer Scanner module — identifies IoT device manufacturers by MAC during network audits
